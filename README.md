@@ -10,10 +10,12 @@ To showcase JavaScript knowledge
 - JavaScript
 
 ## Website
+https://zlandon.github.io/Web-Password-Generator/
 
 ## Contributions
 - Dreki-Santi
 - ZLandon
 
 ### Check Out
-The develop branch for updated JavaScript code by ZLandon showcasing another way to make the password generator work!
+https://github.com/Dreki-Santi/password-generator
+For the original project and work done by Dreki-Santi
