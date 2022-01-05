@@ -8,21 +8,30 @@ var optionFive = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789
 
 var options = [optionOne, optionTwo, optionThree, optionFour, optionFive];
 
-var promptChar = '';
-var numNeeded = promptChar;
+var promptChar, numNeeded = '';
+var charSelectPrompt;
 
-// working to clean up cases
-function getText(optionNum) {
-    for(var i = 0; i < promptChar; i++) {
-        var randomNumber = Math.floor(Math.random() * options[optionNum - 1].length);
-        numNeeded += options[optionNum - 1].substring(randomNumber, randomNumber + 1);
+//working to clean up cases
+function getText(charSelectPrompt) {
+    numNeeded = '';
+    if (!(charSelectPrompt > 0 && charSelectPrompt < 6)) {
+        window.alert("You did not pick a valid option. Try again.");
+
+            //call generator agin so user can pick valid option
+            generatePassword();
+    }
+    else {
+        for(var i = 0; i < promptChar; i++) {
+            var randomNumber = Math.floor(Math.random() * options[charSelectPrompt-1].length);
+            numNeeded += options[charSelectPrompt-1].substring(randomNumber, randomNumber + 1);
+        }
     }
 }
 
 // get number of characters user wants
 function charLength() {
     //ask how many characters are needed
-    var promptChar = window.prompt("How many characters would you like to generate for you password? \nPlease choose from 8 to 128.");
+    promptChar = window.prompt("How many characters would you like to generate for you password? \nPlease choose from 8 to 128.");
 
     promptChar = parseInt(promptChar);
 
@@ -35,46 +44,23 @@ function charLength() {
 }
 
 function generatePassword() {
-    // ask what types of characters they would like for their password
-    var charSelectPrompt = window.prompt("Which characters would you like to include in your password? \nPlease enter one of the following: 1 for just LETTERS A-Z, 2 for LETTERS and NUMBERS, 3 for LETTERS and SPECIAL CHARACTERS, 4 for NUMBERS and SPECIAL CHARACTERS, 5 for ALL options.")
+    //ask what types of characters they would like for their password
+    charSelectPrompt = window.prompt("Which characters would you like to include in your password? \nPlease enter one of the following: 1 for just LETTERS A-Z, 2 for LETTERS and NUMBERS, 3 for LETTERS and SPECIAL CHARACTERS, 4 for NUMBERS and SPECIAL CHARACTERS, 5 for ALL options.")
 
     charSelectPrompt = parseInt(charSelectPrompt);
-
-    // use switch to choose what characters user want in their password
-    switch(charSelectPrompt) {
-        case 1:
-            getText(charSelectPrompt);
-            return numNeeded;
-        case 2:
-            getText(charSelectPrompt);
-            return numNeeded;
-        case 3:
-            getText(charSelectPrompt);
-            return numNeeded;
-        case 4:
-            getText(charSelectPrompt);
-            return numNeeded;
-        case 5:
-            getText(charSelectPrompt);
-            return numNeeded;
-        default:
-            window.alert("You did not pick a valid option. Try again.");
-
-            //call generator agin so user can pick valid option
-            return generatePassword();
-    }
+    getText(charSelectPrompt);
+    return numNeeded;
 }
-
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
-  var password = charLength();
-  var passwordText = document.querySelector("#password");
+    var passwordText = document.querySelector("#password");
+    passwordText.value = "";
 
-  passwordText.value = password;
+    passwordText.value = charLength();
 }
 
 // Add event listener to generate button
